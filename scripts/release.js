@@ -5,6 +5,7 @@ const fs = require('fs');
 const _ = require('lodash');
 
 console.log('RELEASE', process.env.RELEASE_BUILD);
+console.log('type RELEASE', typeof process.env.RELEASE_BUILD);
 console.log('!RELEASE', !process.env.RELEASE_BUILD);
 console.log('!!RELEASE', !!process.env.RELEASE_BUILD);
 console.log('!!!RELEASE', !!!process.env.RELEASE_BUILD);
