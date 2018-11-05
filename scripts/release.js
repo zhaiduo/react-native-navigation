@@ -4,20 +4,14 @@ const semver = require('semver');
 const fs = require('fs');
 const _ = require('lodash');
 
-console.log('RELEASE', process.env.RELEASE_BUILD);
-console.log('type RELEASE', typeof process.env.RELEASE_BUILD);
-console.log('!RELEASE', !process.env.RELEASE_BUILD);
-console.log('!!RELEASE', !!process.env.RELEASE_BUILD);
-console.log('!!!RELEASE', !!!process.env.RELEASE_BUILD);
-
 // Workaround JS
-const release = !!!process.env.RELEASE_BUILD;
+const isRelease = process.env.RELEASE_BUILD === 'true';
 
-console.log('release', release);
-console.log('type release', typeof release);
+console.log('release', isRelease);
+console.log('type release', typeof isRelease);
 
 const ONLY_ON_BRANCH = 'origin/master';
-const VERSION_TAG = release ? 'latest' : 'snapshot';
+const VERSION_TAG = isRelease ? 'latest' : 'snapshot';
 const VERSION_INC = 'patch';
 
 function run() {
@@ -69,7 +63,7 @@ function versionTagAndPublish() {
   const currentPublished = findCurrentPublishedVersion();
   console.log(`current published version: ${currentPublished}`);
 
-  const version = release ? process.env.VERSION : `${currentPublished}-snapshot.${process.env.BUILD_ID}`;
+  const version = isRelease ? process.env.VERSION : `${currentPublished}-snapshot.${process.env.BUILD_ID}`;
   console.log(`Publishing version: ${version}`);
 
   tryPublishAndTag(version);
