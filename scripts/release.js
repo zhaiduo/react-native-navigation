@@ -4,8 +4,16 @@ const semver = require('semver');
 const fs = require('fs');
 const _ = require('lodash');
 
+console.log('RELEASE', process.env.RELEASE_BUILD);
+console.log('!RELEASE', !process.env.RELEASE_BUILD);
+console.log('!!RELEASE', !!process.env.RELEASE_BUILD);
+console.log('!!!RELEASE', !!!process.env.RELEASE_BUILD);
+
 // Workaround JS
 const release = !!!process.env.RELEASE_BUILD;
+
+console.log('release', release);
+console.log('type release', typeof release);
 
 const ONLY_ON_BRANCH = 'origin/master';
 const VERSION_TAG = release ? 'latest' : 'snapshot';
